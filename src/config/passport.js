@@ -10,7 +10,8 @@ passport.use(
             if (loopUser.username === username) user = loopUser;
         });
 
-        if (user === null || user.password !== password) {
+        const passAuth = bcrypt.compare(password, user.password);
+        if (user === null || !passAuth) {
             console.log("Passport: Incorrect username or password.");
             return cb(null, false, { message: "Incorrect username or password." });
         }
