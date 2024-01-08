@@ -1,5 +1,6 @@
-const express = require('express');
-const path = require('path');
+import express from 'express';
+import path from 'path';
+import { connectToDatabase } from '../config/dbconnection.js';
 
 const app = express();
 
@@ -12,3 +13,9 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
     console.log("Express: The server is now listening on http://localhost:3000/")
 });
+
+async function main() {
+    connectToDatabase();
+}
+
+main();
