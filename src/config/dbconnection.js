@@ -6,7 +6,7 @@ dotenv.config({ path: path.join(process.cwd(), "src/.env") });
 
 const mongodbUri = `mongodb+srv://${process.env.MONGO_ROOT_USER}:${process.env.MONGO_ROOT_PASSWORD}@${process.env.MONGO_HOST}/${process.env.MONGO_DB_NAME}?retryWrites=true&w=majority`;
 
-export const connectToDatabase = async () => {
+const connectToDatabase = async () => {
     try {
         console.log("MongoDB: Establishing a database connection...");
         console.log(mongodbUri);
@@ -19,3 +19,5 @@ export const connectToDatabase = async () => {
         console.error(err.message);
     }
 };
+
+export default connectToDatabase;
