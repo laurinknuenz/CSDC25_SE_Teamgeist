@@ -1,0 +1,82 @@
+<h1>Teamgeist</h1> 
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Teamgeist</title>
+  <link rel="stylesheet" href="./style.css">
+  <script>
+    window.addEventListener('load', () => {
+    // Get the success message from the URL parameter
+    const urlParams = new URLSearchParams(window.location.search);
+    const successMessage = urlParams.get('success');
+
+    // Check if the success message should be displayed
+    const displaySuccess = sessionStorage.getItem('successMessage');
+    if (successMessage === 'registration_success' && displaySuccess) {
+        const successElement = document.getElementById('successMessage');
+        successElement.textContent = 'Registration successful! You can now log in'; // Customize the success message
+        successElement.style.display = 'block'; // Make the success message visible
+
+        // Set the flag to indicate that the success message has been displayed
+        sessionStorage.setItem('successMessage', false);
+        console.log("in the if of the script");
+        sessionStorage.removeItem('successMessage');
+    }
+    else {
+        // Hide the success message if it shouldn't be displayed
+        const successElement = document.getElementById('successMessage');
+        successElement.style.display = 'none';
+        console.log("in the else of the script");
+        sessionStorage.removeItem('successMessage');
+    }
+});
+  </script>
+</head>
+
+<body>
+  <div class="login-box">
+    <h2>Registration</h2>
+    <img src="images/mindShareLogo.png" alt="Logo" title="Login">
+    <form id="loginUserForm">
+        <div class="user-box">
+            <input type="text" name="username" id="username" required="">
+            <label>Invite Code <Code></Code></label>
+          </div>
+        <div class="user-box">
+        <input type="text" name="username" id="username" required="">
+        <label>Username</label>
+      </div>
+      <div class="user-box">
+        <input type="password" name="password" id="password" required="">
+        <label>Password</label>
+      </div>
+
+      <div class="user-box">
+        <input type="password" name="password" id="password" required="">
+        <label>Confirm password</label>
+      </div>
+      <button type="submit" class="login-button">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        Register
+      </button>
+      <button id="registerButton" class="register-button" onclick="handleRegisterButtonClick()">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        or Back to Login
+      </button>
+      <p id="successMessage" class="success-message"></p>
+      <p id="errorMessage" class="error-message"></p>
+    </form>
+  </div>
+  <script src="login.js"></script>
+</body>
+
+</html>
