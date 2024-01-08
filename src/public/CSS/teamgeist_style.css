@@ -1,0 +1,34 @@
+.team_geist_form_row {
+    display: flex;
+    flex-direction: row;
+    padding: 5px 0;
+}
+
+.team_geist_form_row div {
+    width: 40%;
+}
+
+.team_geist_form_row strong {
+    width: 50% !important;
+}
+
+.team_geist_form_row strong.values {
+    height: 25px;
+    text-align: center;
+}
+
+.team_geist_form_row label, .team_geist_form_row>div>strong {
+    background : #ffffff;
+    padding: 1px 5px 1px 1px ;
+    box-shadow: 0 2px #000000;
+}
+
+button.btn {
+    width: 90px;
+    padding: 20px 10px;
+}
+
+.team_geist_form_row input, .team_geist_form_row select {
+    width: 60%!important;
+    box-shadow: 2px 2px #000000;
+}
