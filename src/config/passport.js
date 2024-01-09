@@ -1,34 +1,34 @@
 import passport from "passport";
 import LocalStrategy from "passport-local";
+import User from "../models/User.js"; // Import the User model
+//const users = null; //TODO: GET ALL USERS FROM MONGODB WITH MONGOOSE
 
-const users = null; //TODO: GET ALL USERS FROM MONGODB WITH MONGOOSE
+new LocalStrategy(async function verify(username, password, done) {
+  try {
+    const user = await User.findOne({ username: username });
+    if (!user) {
+      return done(null, false, { message: "Incorrect username." });
+    }
 
-passport.use(
-    new LocalStrategy(function verify(username, password, cb) {
-        let user = null;
-        users.forEach((loopUser) => {
-            if (loopUser.username === username) user = loopUser;
-        });
+    const match = await bcrypt.compare(password, user.password);
+    if (!match) {
+      return done(null, false, { message: "Incorrect password." });
+    }
 
-        const passAuth = bcrypt.compare(password, user.password);
-        if (user === null || !passAuth) {
-            console.log("Passport: Incorrect username or password.");
-            return cb(null, false, { message: "Incorrect username or password." });
-        }
-
-        console.log("Passport: Login succeeded!");
-        return cb(null, user);
-    })
-);
+    return done(null, user);
+  } catch (err) {
+    return done(err);
+  }
+});
 
 passport.serializeUser(function (user, cb) {
-    cb(null, user.id);
+  cb(null, user.id);
 });
 
 passport.deserializeUser(function (id, cb) {
-    return cb(
-        null,
-        users.find((user) => user.id === id)
-    );
+  return cb(
+    null,
+    users.find((user) => user.id === id)
+  );
 });
 export default passport;
