@@ -22,29 +22,28 @@
     <img src="images/mindShareLogo.png" alt="Logo" title="Login">
     <form id="loginUserForm">
       <div class="user-box">
-        <input type="text" name="username" id="username" required="" placeholder="Invite Code">
+        <input type="text" name="inviteCode" id="inviteCode" required="" placeholder="Invite Code">
       </div>
       <div class="user-box">
-        <input type="text" name="username" id="username" required="" placeholder="Username">
+        <input type="text" name="username" id="registerUsername" required="" placeholder="Username">
       </div>
       <div class="user-box">
-        <input type="password" name="password" id="password" required="" placeholder="Password">
+        <input type="password" name="password" id="registerPassword" required="" placeholder="Password">
       </div>
-
       <div class="user-box">
-        <input type="password" name="password" id="password" required="" placeholder="Confirm password">
+        <input type="password" name="confirmPassword" id="confirmPassword" required="" placeholder="Confirm password">
       </div>
     </form>
-    <button type="submit" class="btn">
+    <button id="registerButton" class="btn">
       Register
     </button>
     <button id="registerButton" class="btn" onclick="handleRegisterButtonClick()">
-      or Back to Login
+      Back to Login
     </button>
     <p id="successMessage" class="success-message"></p>
     <p id="errorMessage" class="error-message"></p>
   </section>
-  <!-- <script src="login.js"></script> -->
+  <script src="login.js"></script>
 </body>
 
 </html>
