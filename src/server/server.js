@@ -69,7 +69,7 @@ app.listen(port, () => {
 });
 
 async function main() {
-  connectToDatabase();
+  await connectToDatabase();
 }
 
 main();
