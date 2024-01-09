@@ -16,3 +16,7 @@ Teamgeist ist eine Web-App für Team- und Aktivitätenmanagement von Sportmannsc
 add **"type": "module",** in server.js
 npm install bcrypt
 other npm install, lost documentation
+
+# if port is already in use #
+netstat -ano | findstr :3000
+taskkill /F /PID 9999 
