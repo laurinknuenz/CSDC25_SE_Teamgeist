@@ -13,5 +13,6 @@ Teamgeist ist eine Web-App für Team- und Aktivitätenmanagement von Sportmannsc
 **npm run start-nodemon** → Mit diesem Command kann der Backend-Server mit Nodemon gestartet werden.
 
 # David Notizen *
-
+add **"type": "module",** in server.js
 npm install bcrypt
+other npm install, lost documentation
