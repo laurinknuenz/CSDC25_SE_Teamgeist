@@ -1,49 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/main.css">
-  <link rel="stylesheet" href="css/buttons.css">
-  <link rel="stylesheet" href="css/inputs.css">
-  <link rel="stylesheet" href="css/login_style.css">
-  <style>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/buttons.css" />
+    <link rel="stylesheet" href="css/inputs.css" />
+    <link rel="stylesheet" href="css/login_style.css" />
+    <style>
       body {
-          background: #fff;
+        background: #fff;
       }
-  </style>
-  <title>Teamgeist</title>
-</head>
+    </style>
+    <title>Teamgeist</title>
+  </head>
 
-<body>
-  <section>
-    <h2>Registration</h2>
-    <img src="images/mindShareLogo.png" alt="Logo" title="Login">
-    <form id="loginUserForm">
-      <div class="user-box">
-        <input type="text" name="inviteCode" id="inviteCode" required="" placeholder="Invite Code">
-      </div>
-      <div class="user-box">
-        <input type="text" name="username" id="registerUsername" required="" placeholder="Username">
-      </div>
-      <div class="user-box">
-        <input type="password" name="password" id="registerPassword" required="" placeholder="Password">
-      </div>
-      <div class="user-box">
-        <input type="password" name="confirmPassword" id="confirmPassword" required="" placeholder="Confirm password">
-      </div>
-    </form>
-    <button id="registerButton" class="btn">
-      Register
-    </button>
-    <button id="registerButton" class="btn" onclick="handleRegisterButtonClick()">
-      Back to Login
-    </button>
-    <p id="successMessage" class="success-message"></p>
-    <p id="errorMessage" class="error-message"></p>
-  </section>
-  <script src="login.js"></script>
-</body>
-
+  <body>
+    <section>
+      <h2>Registration</h2>
+      <img src="images/mindShareLogo.png" alt="Logo" title="Login" />
+      <form id="loginUserForm">
+        <div class="user-box">
+          <input
+            type="text"
+            name="inviteCode"
+            id="inviteCode"
+            required=""
+            placeholder="Invite Code"
+          />
+        </div>
+        <div class="user-box">
+          <input
+            type="text"
+            name="username"
+            id="registerUsername"
+            required=""
+            placeholder="Username"
+          />
+        </div>
+        <div class="user-box">
+          <input
+            type="password"
+            name="password"
+            id="registerPassword"
+            required=""
+            placeholder="Password"
+          />
+        </div>
+        <div class="user-box">
+          <input
+            type="password"
+            name="confirmPassword"
+            id="confirmPassword"
+            required=""
+            placeholder="Confirm password"
+          />
+        </div>
+      </form>
+      <button id="registerButton" class="btn">Register</button>
+      <button
+        id="registerButton"
+        class="btn"
+        onclick="handleRegisterButtonClick()"
+      >
+        Back to Login
+      </button>
+      <p id="successMessage" class="success-message"></p>
+      <p id="errorMessage" class="error-message"></p>
+    </section>
+    <script src="login.js"></script>
+  </body>
 </html>
