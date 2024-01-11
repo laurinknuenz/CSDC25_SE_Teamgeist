@@ -1,4 +1,6 @@
 import mongoose from 'mongoose';
+import ShortUniqueId from 'short-unique-id';
+
 const { Schema, model } = mongoose;
 
 const TeamSchema = new Schema({
@@ -24,8 +26,18 @@ const TeamSchema = new Schema({
             type: Schema.Types.ObjectId,
             ref: "User"
         }]
-    }]
+    }],
+    inviteCode: {
+        type: String,
+        required: true,
+        unique: true
+    }
 });
 
-const Team = model("Team", TeamSchema);
-export default Team;
+TeamSchema.pre("validate", function (next) {
+    const uid = new ShortUniqueId({ dictionary: "alphanum_upper", length: 6 });
+    this.inviteCode = uid.rnd();
+    next();
+});
+
+export const Team = model("Team", TeamSchema);
