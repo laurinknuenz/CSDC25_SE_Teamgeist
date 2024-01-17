@@ -1,6 +1,13 @@
 document
-  .getElementById("registerButton")
-  .addEventListener("click", handleRegisterButtonClick);
+  .getElementById("loginUserForm")
+  .addEventListener("submit", handleRegisterButtonClick);
+
+document
+.getElementById("backToLoginButton")
+.addEventListener("click", function() {
+  // Logic to go back to the login page
+});
+
 
 function handleRegisterButtonClick(event) {
   event.preventDefault();
