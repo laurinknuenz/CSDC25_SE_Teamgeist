@@ -14,7 +14,7 @@ Teamgeist ist eine Web-App für Team- und Aktivitätenmanagement von Sportmannsc
 
 # David Notizen *
 add **"type": "module",** in server.js
-npm install bcrypt
+npm install short-unique-id bcrypt passport-local mongoose
 other npm install, lost documentation
 
 # if port is already in use #

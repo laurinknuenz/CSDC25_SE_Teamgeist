@@ -1,6 +1,6 @@
 import passport from "passport";
 import LocalStrategy from "passport-local";
-import User from "../models/User.js"; // Import the User model
+import { User } from "../models/User.js"; // Import the User model
 //const users = null; //TODO: GET ALL USERS FROM MONGODB WITH MONGOOSE
 
 new LocalStrategy(async function verify(username, password, done) {
