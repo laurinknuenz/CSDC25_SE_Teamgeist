@@ -11,7 +11,6 @@ const mongodbUri = `mongodb+srv://${process.env.MONGO_ROOT_USER}:${process.env.M
 const connectToDatabase = async () => {
     try {
         console.log("MongoDB: Establishing a database connection...");
-        console.log(mongodbUri);
         await mongoose.connect(mongodbUri, {
             authSource: 'admin'
         });
