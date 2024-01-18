@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/buttons.css" />
+    <link rel="stylesheet" href="css/inputs.css" />
+    <link rel="stylesheet" href="css/player_info_style.css" />
+    <title>Teamgeist - Player Information</title>
+  </head>
+
+  <body>
+    <section>
+      <form action="#">
+        <strong>Player Information</strong>
+        <div class="user-box">
+          <input
+            type="text"
+            required=""
+            id="firstname"
+            placeholder="First Name"
+          />
+        </div>
+
+        <div class="user-box">
+          <input
+            type="text"
+            required=""
+            id="username"
+            placeholder="Last Name"
+          />
+        </div>
+
+        <div class="user-box">
+          <input type="email" required="" id="email" placeholder="Email" />
+        </div>
+      </form>
+      <button class="btn" onclick="registerUser(event)">Update</button>
+    </section>
+  </body>
+</html>

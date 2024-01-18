@@ -1,0 +1,11 @@
+form input, form strong {
+    margin: 0 0 5px 0;
+}
+
+form {
+    padding-bottom: 0px !important;
+}
+
+.btn {
+    padding: 2px 5px;
+}
