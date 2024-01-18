@@ -8,7 +8,6 @@ document
 
 function handleLoginButtonClick(event) {
   event.preventDefault();
-  // Redirect to login.html
   window.location.href = '/login';
 }
 
@@ -17,9 +16,7 @@ function handleRegisterButtonClick(event) {
   const inviteCode = document.querySelector('input[name="inviteCode"]').value;
   const username = document.querySelector('input[name="username"]').value;
   const password = document.querySelector('input[name="password"]').value;
-  const confirmPassword = document.querySelector(
-    'input[name="confirmPassword"]'
-  ).value;
+  const confirmPassword = document.querySelector('input[name="confirmPassword"]').value;
 
   if (password == confirmPassword) {
     fetch("/api/users/", {
@@ -38,7 +35,7 @@ function handleRegisterButtonClick(event) {
       .then((data) => {
         document.getElementById("errorMessage").textContent = "";
         document.getElementById("successMessage").textContent = "Registration successful!";
-        // Redirect to dashboard 
+        window.location.href = '/dashboard';
       })
       .catch((error) => {
         document.getElementById("errorMessage").textContent = error.message;
