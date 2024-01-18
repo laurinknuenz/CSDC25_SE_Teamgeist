@@ -18,7 +18,7 @@ function handleRegisterButtonClick(event) {
     'input[name="confirmPassword"]'
   ).value;
 
-  fetch("/register", {
+  fetch("/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
