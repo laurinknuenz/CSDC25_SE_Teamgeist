@@ -17,23 +17,14 @@
 
   <body>
     <section>
-      <h2>Registration</h2>
-      <img src="images/mindShareLogo.png" alt="Logo" title="Registration" />
-      <form id="registerUserForm">
-        <div class="user-box">
-          <input
-            type="text"
-            name="inviteCode"
-            id="inviteCode"
-            required
-            placeholder="Invite Code"
-          />
-        </div>
+      <h2>Login</h2>
+      <img src="images/mindShareLogo.png" alt="Logo" title="Login" />
+      <form id="loginUserForm">
         <div class="user-box">
           <input
             type="text"
             name="username"
-            id="registerUsername"
+            id="loginUsername"
             required
             placeholder="Username"
           />
@@ -42,26 +33,17 @@
           <input
             type="password"
             name="password"
-            id="registerPassword"
-            required=""
+            id="loginPassword"
+            required
             placeholder="Password"
           />
         </div>
-        <div class="user-box">
-          <input
-            type="password"
-            name="confirmPassword"
-            id="confirmPassword"
-            required=""
-            placeholder="Confirm password"
-          />
-        </div>
-        <button type="submit" id="registerButton" class="btn">Register</button>
+        <button type="submit" id="loginButton" class="btn">Login</button>
       </form>
-      <button id="backToLoginButton" class="btn">Back to Login</button>
+      <button id="backToRegisterButton" class="btn">Register</button>
       <p id="successMessage" class="success-message"></p>
       <p id="errorMessage" class="error-message"></p>
     </section>
-    <script src="js/registration.js"></script>
+    <script src="js/login.js"></script>
   </body>
 </html>

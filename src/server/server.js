@@ -25,6 +25,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(express.static(path.join(process.cwd(), 'src/public')));
 app.use('/api/auth', authRouter);
 app.use('/api/users', userRouter);
 app.use('/api/teams', teamRouter);

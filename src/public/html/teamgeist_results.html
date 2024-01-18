@@ -1,72 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/teamgeist_style.css">
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/buttons.css">
-    <link rel="stylesheet" href="css/inputs.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/teamgeist_style.css" />
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/buttons.css" />
+    <link rel="stylesheet" href="css/inputs.css" />
     <style>
-        body {
-            background: #fff;
-        }
+      body {
+        background: #fff;
+      }
     </style>
     <title>Document</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <section>
-        <div id="results">
-            <div class="team_geist_form_row">
-                <div>
-                    <strong>Betreff</strong>
-                </div>
-                <strong id="betreff" class="values"></strong>
-            </div>
-            <div class="team_geist_form_row">
-                <div>
-                    <strong>Aktivität</strong>
-                </div>
-
-                <strong id="aktivitat" class="values"></strong>
-            </div>
-            <div class="team_geist_form_row">
-                <div>
-                    <strong>Datum und Uhrzeit</strong>
-                </div>
-
-                <strong id="datum" class="values"></strong>
-            </div>
-            <div class="team_geist_form_row">
-                <div>
-                    <strong>Ort</strong>
-                </div>
-
-                <strong id="ort" class="values"></strong>
-            </div>
+      <div id="results">
+        <div class="team_geist_form_row">
+          <div>
+            <strong>Betreff</strong>
+          </div>
+          <strong id="betreff" class="values"></strong>
         </div>
+        <div class="team_geist_form_row">
+          <div>
+            <strong>Aktivität</strong>
+          </div>
 
-        <button id="apply_btn" class="btn">Zusage</button>
-        <button id="cancel_btn" class="btn">Absage</button>
-        <button id="back_btn" class="btn">Zuruck</button>
+          <strong id="aktivitat" class="values"></strong>
+        </div>
+        <div class="team_geist_form_row">
+          <div>
+            <strong>Datum und Uhrzeit</strong>
+          </div>
+
+          <strong id="datum" class="values"></strong>
+        </div>
+        <div class="team_geist_form_row">
+          <div>
+            <strong>Ort</strong>
+          </div>
+
+          <strong id="ort" class="values"></strong>
+        </div>
+      </div>
+
+      <button id="apply_btn" class="btn">Zusage</button>
+      <button id="cancel_btn" class="btn">Absage</button>
+      <button id="back_btn" class="btn">Zuruck</button>
     </section>
-</body>
+  </body>
 
-<script>
-
+  <script>
     let betreff = document.getElementById("betreff");
     let aktivitat = document.getElementById("aktivitat");
     let datum = document.getElementById("datum");
     let ort = document.getElementById("ort");
 
     const getObject = {
-        betreff: "Football spiel",
-        aktivitat: "football",
-        datum: "2024 - 11 - 11",
-        ort: "Wien"
-    }
+      betreff: "Football spiel",
+      aktivitat: "football",
+      datum: "2024 - 11 - 11",
+      ort: "Wien",
+    };
 
     betreff.innerText = getObject.betreff;
     aktivitat.innerText = getObject.aktivitat;
@@ -74,7 +72,5 @@
     ort.innerText = getObject.ort;
 
     console.log(sendObject);
-
-</script>
-
+  </script>
 </html>

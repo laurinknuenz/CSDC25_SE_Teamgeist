@@ -1,110 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/teamgeist_team_style.css">
-    <link rel="stylesheet" href="css/buttons.css">
-    <link rel="stylesheet" href="css/inputs.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/teamgeist_team_style.css" />
+    <link rel="stylesheet" href="css/buttons.css" />
+    <link rel="stylesheet" href="css/inputs.css" />
     <title>Document</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <section>
-        <div class="select_action">
-            <button class="btn active" id="to_create">Create Team</button>
-            <button class="btn" id="to_manage">Manage Team</button>
+      <div class="select_action">
+        <button class="btn active" id="to_create">Create Team</button>
+        <button class="btn" id="to_manage">Manage Team</button>
+      </div>
+
+      <form action="#">
+        <div class="container">
+          <div>
+            <strong>Team Information</strong>
+          </div>
+
+          <input
+            type="text"
+            name="team_name"
+            id="team_name"
+            placeholder="Team Name"
+          />
+          <input
+            type="text"
+            name="team_type"
+            id="team_type"
+            placeholder="Sport Type"
+          />
+          <input
+            type="text"
+            name="team_location"
+            id="team_location"
+            placeholder="Location"
+          />
         </div>
+        <div class="container">
+          <div>
+            <strong>Manager Information</strong>
+          </div>
 
-        <form action="#">
-            <div class="container">
-                <div>
-                    <strong>Team Information</strong>
-                </div>
+          <input
+            type="text"
+            name="team_manager_name"
+            id="team_manager_name"
+            placeholder="Manager's Name"
+          />
+          <input
+            type="text"
+            name="team_manager_contact"
+            id="team_manager_contact"
+            placeholder="Contact Information"
+          />
+        </div>
+        <div class="container">
+          <div>
+            <strong>Players</strong>
+          </div>
 
-                <input type="text" name="team_name" id="team_name" placeholder="Team Name">
-                <input type="text" name="team_type" id="team_type" placeholder="Sport Type">
-                <input type="text" name="team_location" id="team_location" placeholder="Location">
+          <input
+            type="text"
+            name="search"
+            id="search"
+            class="search_bar"
+            placeholder="Search Player"
+          />
+          <div class="player_select">
+            <div class="player">
+              <img src="" alt="." />
+              <strong>Max Musterman</strong>
             </div>
-            <div class="container">
-                <div>
-                    <strong>Manager Information</strong>
-                </div>
-
-                <input type="text" name="team_manager_name" id="team_manager_name" placeholder="Manager's Name">
-                <input type="text" name="team_manager_contact" id="team_manager_contact"
-                    placeholder="Contact Information">
+            <div class="player">
+              <img src="" alt="." />
+              <strong>Max Musterman</strong>
             </div>
-            <div class="container">
-                <div>
-                    <strong>Players</strong>
-                </div>
-
-                <input type="text" name="search" id="search" class="search_bar" placeholder="Search Player">
-                <div class="player_select">
-                    <div class="player">
-                        <img src="" alt=".">
-                        <strong>Max Musterman</strong>
-                    </div>
-                    <div class="player">
-                        <img src="" alt=".">
-                        <strong>Max Musterman</strong>
-                    </div>
-                    <div class="player">
-                        <img src="" alt=".">
-                        <strong>Max Musterman</strong>
-                    </div>
-                </div>
+            <div class="player">
+              <img src="" alt="." />
+              <strong>Max Musterman</strong>
             </div>
-        </form>
+          </div>
+        </div>
+      </form>
 
-        <button class="btn" id="create_btn">Create</button>
-        <button class="btn" id="manage_btn">Manage</button>
+      <button class="btn" id="create_btn">Create</button>
+      <button class="btn" id="manage_btn">Manage</button>
     </section>
-</body>
-<script>
+  </body>
+  <script>
     const responseObj = {
-        team_name: "Team 1",
-        team_type: "Some type",
-        team_location: "Wien",
-        team_manager_name: "Manager 1",
-        team_manager_contact: "+2342342344234"
-    }
+      team_name: "Team 1",
+      team_type: "Some type",
+      team_location: "Wien",
+      team_manager_name: "Manager 1",
+      team_manager_contact: "+2342342344234",
+    };
 
     function getData() {
-        Object.keys(responseObj).forEach(item => {
-            document.getElementById(item).value = responseObj[item]
-        })
+      Object.keys(responseObj).forEach((item) => {
+        document.getElementById(item).value = responseObj[item];
+      });
     }
 
     function clearData() {
-        Object.keys(responseObj).forEach(item => {
-            document.getElementById(item).value = ""
-        })
+      Object.keys(responseObj).forEach((item) => {
+        document.getElementById(item).value = "";
+      });
     }
 
-    document.getElementById("to_create").addEventListener("click", ev => {
-        const btn = document.getElementById("to_create")
-        const otherBtn = document.getElementById("to_manage")
-        if (!btn.classList.contains("active")) {
-            btn.classList.add("active")
-            otherBtn.classList.remove("active")
-            clearData()
-        }
+    document.getElementById("to_create").addEventListener("click", (ev) => {
+      const btn = document.getElementById("to_create");
+      const otherBtn = document.getElementById("to_manage");
+      if (!btn.classList.contains("active")) {
+        btn.classList.add("active");
+        otherBtn.classList.remove("active");
+        clearData();
+      }
+    });
 
-    })
-
-    document.getElementById("to_manage").addEventListener("click", ev => {
-        const btn = document.getElementById("to_manage")
-        const otherBtn = document.getElementById("to_create")
-        if (!btn.classList.contains("active")) {
-            btn.classList.add("active")
-            otherBtn.classList.remove("active")
-            getData()
-        }
-    })
-</script>
-
+    document.getElementById("to_manage").addEventListener("click", (ev) => {
+      const btn = document.getElementById("to_manage");
+      const otherBtn = document.getElementById("to_create");
+      if (!btn.classList.contains("active")) {
+        btn.classList.add("active");
+        otherBtn.classList.remove("active");
+        getData();
+      }
+    });
+  </script>
 </html>
