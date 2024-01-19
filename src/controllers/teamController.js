@@ -1,6 +1,6 @@
 import { Team } from "../models/Team.js"
 
-export async function createTeam(req, res) {
+export async function createTeam(req) {
     const newTeam = await Team.create(req.body);
     return newTeam;
 }

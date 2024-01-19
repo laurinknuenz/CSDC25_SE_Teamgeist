@@ -7,7 +7,7 @@ export async function createUser(req, res) {
 
     const inviteCode = req.body.inviteCode;
     if (inviteCode == "") {
-        let newTeam = await createTeam(req, res);
+        let newTeam = await createTeam(req);
 
         req.body.team = newTeam._id;
         req.body.role = "manager";

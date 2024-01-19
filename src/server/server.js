@@ -3,9 +3,8 @@ import path from 'path';
 import connectToDatabase from '../config/dbconnection.js';
 import passport from '../config/passport.js';
 import session from 'express-session';
-import ShortUniqueId from 'short-unique-id';
 
-import authRouter from '../routes/authRouter.js'
+import authRouter from '../routes/authRouter.js';
 import mainRouter from '../routes/mainRouter.js';
 import userRouter from '../routes/userRouter.js';
 import teamRouter from '../routes/teamRouter.js';
