@@ -7,11 +7,12 @@ passport.use(
     new LocalStrategy(function verify(username, password, cb) {
         let user = null;
         users.forEach((loopUser) => {
-            if (loopUser.username === username) user = loopUser;
+            if (loopUser.username === username) {
+                user = loopUser;
+            }
         });
 
-        const passAuth = bcrypt.compare(password, user.password);
-        if (user === null || !passAuth) {
+        if (user === null || user.password !== password) {
             console.log("Passport: Incorrect username or password.");
             return cb(null, false, { message: "Incorrect username or password." });
         }
