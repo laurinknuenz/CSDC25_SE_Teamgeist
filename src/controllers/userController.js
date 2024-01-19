@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import { User } from "../models/User.js"
-import { createTeam, getTeamIdByInviteCode, addPlayerToTeam, addManagerToTeam } from "./teamController.js";
+import { createTeam, getTeamIdByInviteCode, addPlayerToTeam, addManagerToTeam, removePlayerFromTeam, deleteTeam } from "./teamController.js";
 
 export async function createUser(req, res) {
     console.log(req.body);
@@ -33,7 +33,7 @@ export async function updateUser(req, res) {
 
     const id = req.params.id;
     await User.findByIdAndUpdate(id, req.body);
-    const updatedUser = User.findById(id);
+    const updatedUser = await User.findById(id);
     res.status(200).json({ updatedUser });
 }
 
@@ -49,7 +49,23 @@ export async function getAllUsers(req, res) {
 }
 
 export async function deleteUser(req, res) {
-    const id = req.params.id;
-    await User.findByIdAndDelete(id);
+    const userId = req.params.id;
+    const userToDelete = await User.findById(userId);
+    const teamId = userToDelete.team;
+    console.log(userToDelete);
+
+    if (userToDelete.role == "manager") {
+        const users = await User.find();
+        for (let user of users) {
+            if (user.team.toString() == teamId)
+                await User.deleteOne(user);
+        }
+        await User.deleteOne(userToDelete);
+        deleteTeam(teamId);
+    }
+    else {
+        removePlayerFromTeam(teamId, userId)
+        await User.deleteOne(userToDelete);
+    }
     res.status(204).json();
 }

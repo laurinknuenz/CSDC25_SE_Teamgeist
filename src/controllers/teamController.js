@@ -10,23 +10,29 @@ export async function updateTeam(req, res) {
 
     const id = req.params.id;
     await Team.findByIdAndUpdate(id, req.body);
-    const updatedTeam = Team.findById(id);
+    const updatedTeam = await Team.findById(id);
     res.status(200).json({ updatedTeam });
 }
 
 export async function addManagerToTeam(teamId, playerId) {
-    await Team.findByIdAndUpdate(teamId, {"manager": playerId});
-    const updatedTeam = Team.findById(teamId);
+    await Team.findByIdAndUpdate(teamId, { "manager": playerId });
+    const updatedTeam = await Team.findById(teamId);
     return updatedTeam;
 }
 
 export async function addPlayerToTeam(teamId, playerId) {
     let team = await Team.findById(teamId);
     team.listOfMembers.push(playerId);
-    
+
     await Team.findByIdAndUpdate(teamId, team);
-    const updatedTeam = Team.findById(teamId);
+    const updatedTeam = await Team.findById(teamId);
     return updatedTeam;
+}
+
+export async function removePlayerFromTeam(teamId, playerId) {
+    let playersTeam = await Team.findById(teamId);
+    playersTeam.listOfMembers.splice(playersTeam.listOfMembers.findIndex(item => item.toString() === playerId), 1);
+    await Team.findByIdAndUpdate(teamId, playersTeam);
 }
 
 export async function getTeam(req, res) {
@@ -40,8 +46,6 @@ export async function getTeamIdByInviteCode(inviteCode) {
     return team[0]._id;
 }
 
-export async function deleteTeam(req, res) {
-    const id = req.params.id;
-    await Team.findByIdAndDelete(id);
-    res.status(204).json();
+export async function deleteTeam(teamId) {
+    await Team.findByIdAndDelete(teamId);
 }

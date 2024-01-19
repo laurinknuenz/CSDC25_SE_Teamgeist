@@ -5,6 +5,5 @@ const teamRouter = express.Router();
 
 teamRouter.put("/:id", updateTeam);
 teamRouter.get("/:id", getTeam);
-teamRouter.delete("/:id", deleteTeam);
 
 export default teamRouter;
