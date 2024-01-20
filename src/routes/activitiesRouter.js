@@ -3,9 +3,9 @@ import { createActivity, deleteActivity, getActivity, getAllActivities, changeAt
 
 const activitiesRouter = express.Router();
 
-activitiesRouter.post("/", createActivity);
+activitiesRouter.post("/:id", createActivity);
 activitiesRouter.get("/:id", getActivity);
-activitiesRouter.get("/", getAllActivities);
+activitiesRouter.get("/all/:id", getAllActivities);
 activitiesRouter.put("/:id",changeAttendance);
 activitiesRouter.delete("/:id", deleteActivity);
 
