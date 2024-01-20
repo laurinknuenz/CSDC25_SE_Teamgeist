@@ -36,12 +36,13 @@ function handleRegisterButtonClick(event) {
       return response.json();
     })
     .then(() => {
-      // Check if invite code was empty and redirect to /detailTeam
+      // Check if invite code was empty and redirect to /teamDetails
       if (inviteCode === "") {
-        window.location.href = '/detailTeam';
+        window.location.href = '/teamDetails';
+        // get details_team from newly created team
       } else {
         document.getElementById("responseMessage").textContent = "Registration successful!";
-        window.location.href = '/dashboard';
+        window.location.href = '/login';
       }
     })
     .catch(error => {
