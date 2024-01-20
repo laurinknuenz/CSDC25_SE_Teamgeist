@@ -17,10 +17,6 @@ mainRouter.get('/register', (req, res) => {
     res.sendFile(path.join(process.cwd(), feUrl, "/html/registration.html"));
 });
 
-mainRouter.get('/logout',(req, res) => {
-    res.sendFile(path.join(process.cwd(), feUrl, "/html/login.html"));
-});
-
 mainRouter.get('/dashboard', (req, res) => {
     res.sendFile(path.join(process.cwd(), feUrl, "/html/dashboard.html"));
 });
