@@ -17,9 +17,7 @@ function handleRegisterButtonClick(event) {
   const inviteCode = document.querySelector('input[name="inviteCode"]').value;
   const username = document.querySelector('input[name="username"]').value;
   const password = document.querySelector('input[name="password"]').value;
-  const confirmPassword = document.querySelector(
-    'input[name="confirmPassword"]'
-  ).value;
+  const confirmPassword = document.querySelector('input[name="confirmPassword"]').value;
 
   if (password == confirmPassword) {
     fetch("/api/users/", {
@@ -36,12 +34,11 @@ function handleRegisterButtonClick(event) {
         return response.json();
       })
       .then((data) => {
-        document.getElementById("errorMessage").textContent = "";
-        document.getElementById("successMessage").textContent = "Registration successful!";
+        document.getElementById("responseMessage").textContent = "Registration successful!";
         // Redirect to dashboard 
       })
       .catch((error) => {
-        document.getElementById("errorMessage").textContent = error.message;
+        document.getElementById("responseMessage").textContent = error.message;
       });
   } else {
     alert("Passwords do not match. Please try again.");

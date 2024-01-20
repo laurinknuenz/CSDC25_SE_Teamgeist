@@ -9,8 +9,3 @@ input.search_bar {
     padding: 0 10px;
     border-radius: 25px;
 }
-
-input::placeholder{
-    color: #000;
-    font-weight: 700;
-}
