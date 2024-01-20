@@ -1,11 +1,13 @@
 import express from 'express';
-import { createUser, updateUser, getUser, deleteUser } from '../controllers/userController.js';
+import { createUser, updateUser, getUser, getTeamMembers, deleteUser } from '../controllers/userController.js';
+import { checkAuthenticated, checkNotAuthenticated } from '../util/authcheck.js';
 
 const userRouter = express.Router();
 
-userRouter.post("/", createUser);
-userRouter.put("/:id", updateUser);
-userRouter.get("/:id", getUser);
-userRouter.delete("/:id", deleteUser);
+userRouter.post("/", checkNotAuthenticated, createUser);
+userRouter.put("/", checkAuthenticated, updateUser);
+userRouter.get("/", checkAuthenticated, getUser);
+userRouter.get("/teammembers", checkAuthenticated, getTeamMembers)
+userRouter.delete("/", checkAuthenticated, deleteUser);
 
 export default userRouter;

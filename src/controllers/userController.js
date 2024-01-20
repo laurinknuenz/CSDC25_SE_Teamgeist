@@ -1,3 +1,4 @@
+import { Team } from "../models/Team.js";
 import { User } from "../models/User.js"
 import { createTeam, getTeamIdByInviteCode, addPlayerToTeam, addManagerToTeam, removePlayerFromTeam, deleteTeam } from "./teamController.js";
 
@@ -33,25 +34,32 @@ export async function createUser(req, res) {
 export async function updateUser(req, res) {
     console.log(req.body);
 
-    const id = req.params.id;
+    const id = req.session.passport.user;
     await User.findByIdAndUpdate(id, req.body);
     const updatedUser = await User.findById(id);
     res.status(200).json({ updatedUser });
 }
 
 export async function getUser(req, res) {
-    const id = req.params.id;
+    const id = req.session.passport.user;
     const user = await User.findById(id);
     res.status(200).json({ user });
 }
 
-export async function getAllUsers(req, res) {
-    const users = await User.find();
-    res.status(200).json({ users });
+export async function getTeamMembers(req, res) {
+    const id = req.session.passport.user;
+    const user = await User.findById(id);
+    const team = await Team.findById(user.team);
+    const manager = await User.findById(team.manager);
+    const teammembers = await User.find({ "team": team, "role": "player" });
+    res.status(200).json({
+        "manager": manager,
+        "teammembers": teammembers
+    });
 }
 
 export async function deleteUser(req, res) {
-    const userId = req.params.id;
+    const userId = req.session.passport.user;
     const userToDelete = await User.findById(userId);
     const teamId = userToDelete.team;
     console.log(userToDelete);
