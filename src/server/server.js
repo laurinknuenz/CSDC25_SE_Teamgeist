@@ -1,11 +1,10 @@
 import express from 'express';
 import path from 'path';
 import connectToDatabase from '../config/dbconnection.js';
-import passport from '../config/passport.js';
+import passport from 'passport';
 import session from 'express-session';
-import ShortUniqueId from 'short-unique-id';
 
-import authRouter from '../routes/authRouter.js'
+import authRouter from '../routes/authRouter.js';
 import mainRouter from '../routes/mainRouter.js';
 import userRouter from '../routes/userRouter.js';
 import teamRouter from '../routes/teamRouter.js';
@@ -14,6 +13,7 @@ const app = express();
 const port = 3000;
 
 app.use(express.json());
+app.use(express.static(path.join(process.cwd(), 'src/public')));
 
 app.use(
   session({
@@ -25,8 +25,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(express.static(path.join(process.cwd(), 'src/public')));
-app.use('/api/auth', authRouter);
+app.use('/auth', authRouter);
 app.use('/api/users', userRouter);
 app.use('/api/teams', teamRouter);
 app.use('/', mainRouter);

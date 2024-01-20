@@ -3,7 +3,8 @@ import path from 'path';
 import { checkAuthenticated, checkNotAuthenticated } from '../util/authcheck.js';
 
 export function login() {
-    checkNotAuthenticated();
+    //checkNotAuthenticated();
+    console.log("Auth Entry");
     passport.authenticate("local", {
         successRedirect: '/dashboard',
         failureRedirect: '/login'
@@ -11,7 +12,7 @@ export function login() {
 }
 
 export function logout() {
-    checkAuthenticated();
+    //checkAuthenticated();
     (req, res, next) => {
         req.logout(function (err) {
             if (err) {

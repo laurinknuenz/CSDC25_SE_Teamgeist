@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import { User } from "../models/User.js"
-import { Team } from "../models/Team.js"
+import { createTeam, getTeamIdByInviteCode, addPlayerToTeam, addManagerToTeam, removePlayerFromTeam, deleteTeam } from "./teamController.js";
 
 export async function createUser(req, res) {
     const { inviteCode, username, password } = req.body;
@@ -17,28 +17,68 @@ export async function createUser(req, res) {
             return res.status(400).json({ message: 'Username already taken.' });
         }
 
-        // Create the user
-        const newUser = new User({ username, password, team: team._id });
-        await newUser.save();
-        res.status(201).json({ message: 'User created successfully', user: newUser });
-    } catch (error) {
-        res.status(500).json({ message: error.message });
+
+    const inviteCode = req.body.inviteCode;
+    if (inviteCode == "") {
+        let newTeam = await createTeam(req);
+
+        req.body.team = newTeam._id;
+        req.body.role = "manager";
+        const newUser = await User.create(req.body);
+
+        addManagerToTeam(newTeam._id, newUser._id);
+        res.status(201).json({ newUser, newTeam });
     }
-    // console.log(req.body);
-    // const newUser = await User.create(req.body);
-    // res.status(201).json({ newUser });
+    else {
+        const invitedTeamId = await getTeamIdByInviteCode(inviteCode);
+        req.body.team = invitedTeamId;
+        req.body.role = "player";
+        const newUser = await User.create(req.body);
+
+        addPlayerToTeam(invitedTeamId, newUser._id);
+
+        res.status(201).json({ newUser });
+    }
 }
 
 export async function updateUser(req, res) {
     console.log(req.body);
 
     const id = req.params.id;
-    const updatedUser = await User.findByIdAndUpdate(id, req.body);
+    await User.findByIdAndUpdate(id, req.body);
+    const updatedUser = await User.findById(id);
     res.status(200).json({ updatedUser });
 }
 
 export async function getUser(req, res) {
     const id = req.params.id;
     const user = await User.findById(id);
-    res.status(201).json({ user });
+    res.status(200).json({ user });
+}
+
+export async function getAllUsers(req, res) {
+    const users = await User.find();
+    res.status(200).json({ users });
+}
+
+export async function deleteUser(req, res) {
+    const userId = req.params.id;
+    const userToDelete = await User.findById(userId);
+    const teamId = userToDelete.team;
+    console.log(userToDelete);
+
+    if (userToDelete.role == "manager") {
+        const users = await User.find();
+        for (let user of users) {
+            if (user.team.toString() == teamId)
+                await User.deleteOne(user);
+        }
+        await User.deleteOne(userToDelete);
+        deleteTeam(teamId);
+    }
+    else {
+        removePlayerFromTeam(teamId, userId)
+        await User.deleteOne(userToDelete);
+    }
+    res.status(204).json();
 }

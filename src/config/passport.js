@@ -1,25 +1,16 @@
 import passport from "passport";
 import LocalStrategy from "passport-local";
-import { User } from "../models/User.js"; // Import the User model
-//const users = null; //TODO: GET ALL USERS FROM MONGODB WITH MONGOOSE
 
-new LocalStrategy(async function verify(username, password, done) {
-  try {
-    const user = await User.findOne({ username: username });
-    if (!user) {
-      return done(null, false, { message: "Incorrect username." });
-    }
+import { User } from "../models/User.js";
 
-    const match = await bcrypt.compare(password, user.password);
-    if (!match) {
-      return done(null, false, { message: "Incorrect password." });
-    }
+passport.use(
+    new LocalStrategy(function verify(username, password, cb) {
+        const user = User.find({"username": username})[0];
 
-    return done(null, user);
-  } catch (err) {
-    return done(err);
-  }
-});
+        if (user === null || user.password !== password) {
+            console.log("Passport: Incorrect username or password.");
+            return cb(null, false, { message: "Incorrect username or password." });
+        }
 
 
 passport.serializeUser(function (user, cb) {

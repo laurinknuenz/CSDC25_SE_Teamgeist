@@ -15,6 +15,10 @@ const TeamSchema = new Schema({
         ref: "User"
     }],
     activities: [{
+        activityId: {
+            type: String,
+            required: true
+        },
         subject: { type: String },
         type: {
             type: String,
@@ -35,8 +39,8 @@ const TeamSchema = new Schema({
 });
 
 TeamSchema.pre("validate", function (next) {
-    const uid = new ShortUniqueId({ dictionary: "alphanum_upper", length: 6 });
-    this.inviteCode = uid.rnd();
+    const invUid = new ShortUniqueId({ dictionary: "alphanum_upper", length: 6 });
+    this.inviteCode = invUid.rnd();
     next();
 });
 
