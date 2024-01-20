@@ -2,7 +2,9 @@ import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import path from 'path';
 
-dotenv.config({ path: path.join(process.cwd(), "src/.env") });
+dotenv.config();
+//console.log(process.env.MONGO_ROOT_USER); // Should output the MongoDB username
+
 
 const mongodbUri = `mongodb+srv://${process.env.MONGO_ROOT_USER}:${process.env.MONGO_ROOT_PASSWORD}@${process.env.MONGO_HOST}/${process.env.MONGO_DB_NAME}?retryWrites=true&w=majority`;
 

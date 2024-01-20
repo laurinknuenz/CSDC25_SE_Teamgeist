@@ -1,5 +1,6 @@
 import passport from "passport";
 import LocalStrategy from "passport-local";
+
 import { User } from "../models/User.js";
 
 passport.use(
@@ -11,19 +12,15 @@ passport.use(
             return cb(null, false, { message: "Incorrect username or password." });
         }
 
-        console.log("Passport: Login succeeded!");
-        return cb(null, user);
-    })
-);
 
 passport.serializeUser(function (user, cb) {
-    cb(null, user.id);
+  cb(null, user.id);
 });
 
 passport.deserializeUser(function (id, cb) {
-    return cb(
-        null,
-        users.find((user) => user.id === id)
-    );
+  return cb(
+    null,
+    users.find((user) => user.id === id)
+  );
 });
 export default passport;

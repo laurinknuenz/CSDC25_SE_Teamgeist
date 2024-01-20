@@ -3,7 +3,20 @@ import { User } from "../models/User.js"
 import { createTeam, getTeamIdByInviteCode, addPlayerToTeam, addManagerToTeam, removePlayerFromTeam, deleteTeam } from "./teamController.js";
 
 export async function createUser(req, res) {
-    console.log(req.body);
+    const { inviteCode, username, password } = req.body;
+
+    try {
+        // Check for the invite code in the teams collection
+        const team = await Team.findOne({ inviteCode: inviteCode });
+        if (!team) {
+            return res.status(400).json({ message: 'Invalid invite code.' });
+        }
+        // Check if user already exists
+        const existingUser = await User.findOne({ username: username });
+        if (existingUser) {
+            return res.status(400).json({ message: 'Username already taken.' });
+        }
+
 
     const inviteCode = req.body.inviteCode;
     if (inviteCode == "") {
