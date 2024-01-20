@@ -6,7 +6,7 @@ const mainRouter = express.Router();
 const feUrl = "src/public";
 
 mainRouter.get('/', (req, res) => {
-    res.redirect('/login');
+    res.redirect('/dashboard');
 });
 
 mainRouter.get('/login', checkNotAuthenticated, (req, res) => {
