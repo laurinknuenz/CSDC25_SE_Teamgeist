@@ -43,6 +43,7 @@ export async function getTeam(req, res) {
 
 export async function getTeamIdByInviteCode(inviteCode) {
     const team = await Team.find({ "inviteCode": inviteCode });
+    if(team.length == 0) return null;
     return team[0]._id;
 }
 

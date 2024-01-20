@@ -17,13 +17,16 @@ export async function createUser(req, res) {
     }
     else {
         const invitedTeamId = await getTeamIdByInviteCode(inviteCode);
-        req.body.team = invitedTeamId;
-        req.body.role = "player";
-        const newUser = await User.create(req.body);
+        if (invitedTeamId === null) res.sendStatus(404);
+        else {
+            req.body.team = invitedTeamId;
+            req.body.role = "player";
+            const newUser = await User.create(req.body);
 
-        addPlayerToTeam(invitedTeamId, newUser._id);
+            addPlayerToTeam(invitedTeamId, newUser._id);
 
-        res.status(201).json({ newUser });
+            res.status(201).json({ newUser });
+        }
     }
 }
 
