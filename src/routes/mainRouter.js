@@ -9,28 +9,28 @@ mainRouter.get('/', (req, res) => {
     res.redirect('/dashboard');
 });
 
-mainRouter.get('/login', checkNotAuthenticated, (req, res) => {
+mainRouter.get('/login', (req, res) => {
     res.sendFile(path.join(process.cwd(), feUrl, "/html/login.html"));
 });
 
-mainRouter.get('/register', checkNotAuthenticated, (req, res) => {
+mainRouter.get('/register', (req, res) => {
     res.sendFile(path.join(process.cwd(), feUrl, "/html/registration.html"));
 });
 
-mainRouter.get('/logout', checkAuthenticated, (req, res) => {
+mainRouter.get('/logout',(req, res) => {
     res.sendFile(path.join(process.cwd(), feUrl, "/html/login.html"));
 });
 
-mainRouter.get('/dashboard', checkAuthenticated, (req, res) => {
+mainRouter.get('/dashboard', (req, res) => {
     res.sendFile(path.join(process.cwd(), feUrl, "/html/dashboard.html"));
 });
 
-mainRouter.get('/updateUser', checkAuthenticated, (req, res) => {
-    res.sendFile(path.join(process.cwd(), feUrl, "/html/update-user.html"));
+mainRouter.get('/detailPlayer', (req, res) => {
+    res.sendFile(path.join(process.cwd(), feUrl, "/html/details_player.html"));
 });
 
-mainRouter.get('/updateTeam', checkAuthenticated, (req, res) => {
-    res.sendFile(path.join(process.cwd(), feUrl, "/html/update-team.html"));
+mainRouter.get('/detailTeam', (req, res) => {
+    res.sendFile(path.join(process.cwd(), feUrl, "/html/details_team.html"));
 });
 
 export default mainRouter;
