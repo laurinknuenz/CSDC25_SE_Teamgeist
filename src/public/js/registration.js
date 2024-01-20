@@ -8,7 +8,6 @@ document
 
 function handleLoginButtonClick(event) {
   event.preventDefault();
-  // Redirect to login.html
   window.location.href = '/login';
 }
 
@@ -36,6 +35,7 @@ function handleRegisterButtonClick(event) {
       .then((data) => {
         document.getElementById("responseMessage").textContent = "Registration successful!";
         // Redirect to dashboard 
+        window.location.href = '/dashboard';
       })
       .catch((error) => {
         document.getElementById("responseMessage").textContent = error.message;

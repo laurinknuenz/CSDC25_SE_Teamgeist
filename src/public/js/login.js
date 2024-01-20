@@ -8,6 +8,7 @@ document
 
 function handleRegisterButtonClick(event) {
   event.preventDefault();
+
   // Redirect to register
   window.location.href = '/register';
 }
@@ -17,25 +18,30 @@ function handleLoginButtonClick(event) {
   const username = document.querySelector('input[name="username"]').value;
   const password = document.querySelector('input[name="password"]').value;
 
-  fetch("/api/auth/login/", {
+  const data = {
+    username: username,
+    password: password,
+  };
+
+  fetch("/api/auth/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ username, password }),
+    body: JSON.stringify(data),
   })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Login failed");
+    .then((response) => response.json())
+    .then((result) => {
+      if (result.success) {
+        // Authentication was successful, redirect the user to the dashboard or another page
+        window.location.href = "/dashboard";
+      } else {
+        // Authentication failed, display an error message
+        document.getElementById("errorMessage").textContent = "Login failed. Please check your credentials.";
       }
-      return response.json();
-    })
-    .then(() => {
-      document.getElementById("responseMessage").textContent = "Login successful!";
-      // Redirect to dashboard
-      window.location.href = '/dashboard';
     })
     .catch((error) => {
       document.getElementById("responseMessage").textContent = error.message;
+      console.error("Error during login:", error);
     });
 }
