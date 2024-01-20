@@ -21,6 +21,7 @@ new LocalStrategy(async function verify(username, password, done) {
   }
 });
 
+
 passport.serializeUser(function (user, cb) {
   cb(null, user.id);
 });

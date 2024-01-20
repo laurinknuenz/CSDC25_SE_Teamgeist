@@ -8,7 +8,9 @@ document
 
 function handleRegisterButtonClick(event) {
   event.preventDefault();
-  window.location.href = "/register";
+
+  // Redirect to register
+  window.location.href = '/register';
 }
 
 function handleLoginButtonClick(event) {
@@ -39,6 +41,7 @@ function handleLoginButtonClick(event) {
       }
     })
     .catch((error) => {
+      document.getElementById("responseMessage").textContent = error.message;
       console.error("Error during login:", error);
     });
 }

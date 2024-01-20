@@ -33,12 +33,12 @@ function handleRegisterButtonClick(event) {
         return response.json();
       })
       .then((data) => {
-        document.getElementById("errorMessage").textContent = "";
-        document.getElementById("successMessage").textContent = "Registration successful!";
+        document.getElementById("responseMessage").textContent = "Registration successful!";
+        // Redirect to dashboard 
         window.location.href = '/dashboard';
       })
       .catch((error) => {
-        document.getElementById("errorMessage").textContent = error.message;
+        document.getElementById("responseMessage").textContent = error.message;
       });
   } else {
     alert("Passwords do not match. Please try again.");
