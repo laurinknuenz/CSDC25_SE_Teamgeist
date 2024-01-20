@@ -1,7 +1,7 @@
 import express from 'express';
 import path from 'path';
 import connectToDatabase from '../config/dbconnection.js';
-import passport from '../config/passport.js';
+import passport from 'passport';
 import session from 'express-session';
 
 import authRouter from '../routes/authRouter.js';
@@ -12,6 +12,7 @@ import teamRouter from '../routes/teamRouter.js';
 const app = express();
 
 app.use(express.json());
+app.use(express.static(path.join(process.cwd(), "../frontend/src/public")));
 
 app.use(
   session({
@@ -23,7 +24,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use('/api/auth', authRouter);
+app.use('/auth', authRouter);
 app.use('/api/users', userRouter);
 app.use('/api/teams', teamRouter);
 app.use('/', mainRouter);

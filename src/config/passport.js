@@ -1,16 +1,10 @@
 import passport from "passport";
 import LocalStrategy from "passport-local";
-
-const users = null; //TODO: GET ALL USERS FROM MONGODB WITH MONGOOSE
+import { User } from "../models/User.js";
 
 passport.use(
     new LocalStrategy(function verify(username, password, cb) {
-        let user = null;
-        users.forEach((loopUser) => {
-            if (loopUser.username === username) {
-                user = loopUser;
-            }
-        });
+        const user = User.find({"username": username})[0];
 
         if (user === null || user.password !== password) {
             console.log("Passport: Incorrect username or password.");
