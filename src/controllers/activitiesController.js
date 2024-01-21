@@ -78,7 +78,7 @@ export async function deleteActivity(req, res) {
             activities.splice(activity, 1);
             team.activities = activities;
             await Team.findByIdAndUpdate(teamId, team);
-            res.sendStatus(204);
+            res.status(204).end();
         }
         else res.status(404).json({ message: "Activity not found." });
     }
