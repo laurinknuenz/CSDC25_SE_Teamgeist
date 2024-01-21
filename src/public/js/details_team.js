@@ -3,6 +3,8 @@ document.addEventListener('DOMContentLoaded', () => {
     setupEventListeners();
 });
 
+let allTeamMembers = [];  // This will store all team members
+
 
 function fetchTeamData() {
     fetch('/api/teams/')
@@ -50,9 +52,21 @@ function setupTeamMembers(memberIds) {
             }
             return response.json();
         })
-        .then(data => displayTeamMembers(data.teammembers))
+        .then(data => {
+            allTeamMembers = data.teammembers; // Save the team members
+            displayTeamMembers(allTeamMembers);
+        })
         .catch(error => console.error('Error fetching team members:', error));
 }
+
+function searchTeamMembers(searchText) {
+    const filteredMembers = allTeamMembers.filter(member => 
+        member.firstname.toLowerCase().includes(searchText.toLowerCase()) || 
+        member.lastname.toLowerCase().includes(searchText.toLowerCase())
+    );
+    displayTeamMembers(filteredMembers);
+}
+
 
 function displayTeamMembers(members) {
     console.log('Team Members:', members);
@@ -104,6 +118,9 @@ function disableEditing() {
 function setupEventListeners() {
     document.getElementById('updateTeamButton').addEventListener('click', updateTeam);
     document.getElementById('deleteTeamButton').addEventListener('click', deleteTeam);
+    document.getElementById('search').addEventListener('input', (event) => {
+        searchTeamMembers(event.target.value);
+    });
 }
 
 function updateTeam() {
