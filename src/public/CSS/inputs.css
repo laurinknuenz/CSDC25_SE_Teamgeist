@@ -1,0 +1,11 @@
+input, select {
+    height: 25px;
+    border: 2px solid #000000;
+    text-align: center;
+    width: 100%;
+}
+
+input.search_bar {
+    padding: 0 10px;
+    border-radius: 25px;
+}

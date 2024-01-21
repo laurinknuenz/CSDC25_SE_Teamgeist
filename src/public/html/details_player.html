@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/buttons.css" />
+  <link rel="stylesheet" href="../css/inputs.css" />
+  <link rel="stylesheet" href="../css/player_info_style.css" />
+  <link rel="stylesheet" href="../css/burger_menu.css" />
+  <title>Teamgeist - Player Information</title>
+</head>
+
+<body>
+  <div class="top_header">
+    <div class="burger-menu">
+      <button id="burgerMenuButton">&#9776;</button>
+      <div id="burgerMenuContent" class="burger-menu-content">
+        <a href="/dashboard">Dashboard</a>
+        <a href="/teamDetails">Team Details</a>
+        <a href="/userDetails">User Details</a>
+        <a href="#" id="logoutLink">Logout</a>
+      </div>
+    </div>
+  </div>
+  <section>
+    <form id="playerInfoForm">
+      <strong>Player Information</strong>
+      <div class="user-box">
+        <input type="text" required id="firstname" placeholder="First Name" />
+      </div>
+      <div class="user-box">
+        <input type="text" required id="lastname" placeholder="Last Name" />
+      </div>
+      <div class="user-box">
+        <input type="email" required id="email" placeholder="Email" />
+      </div>
+      <button type="button" class="btn" id="updateButton">Update</button>
+    </form>
+  </section>
+  <script src="../js/details_player.js"></script>
+  <script src="../js/burger_menu.js"></script>
+</body>
+
+</html>

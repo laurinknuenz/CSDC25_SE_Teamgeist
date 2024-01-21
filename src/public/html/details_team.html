@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/teamgeist_team_style.css" />
+  <link rel="stylesheet" href="../css/buttons.css" />
+  <link rel="stylesheet" href="../css/inputs.css" />
+  <link rel="stylesheet" href="../css/burger_menu.css" />
+  <title>Team Details</title>
+</head>
+
+<body>
+  <div class="top_header">
+    <div class="burger-menu">
+      <button id="burgerMenuButton">&#9776;</button>
+      <div id="burgerMenuContent" class="burger-menu-content">
+        <a href="/dashboard">Dashboard</a>
+        <a href="/teamDetails">Team Details</a>
+        <a href="/userDetails">User Details</a>
+        <a href="#" id="logoutLink">Logout</a>
+      </div>
+    </div>
+  </div>
+  <section>
+    <form id="teamInfoForm">
+      <!-- Team Information -->
+      <div class="container" id="teamInfoContainer">
+        <strong>Team Information</strong>
+        <input type="text" id="team_name" placeholder="Team Name" disabled />
+        <input type="text" id="team_type" placeholder="Sport Type" disabled />
+      </div>
+      <!-- Manager Information -->
+      <div class="container" id="managerInfoContainer">
+        <strong>Manager Information</strong>
+        <div id="team_manager_name"></div>
+        <div id="team_manager_contact"></div>
+      </div>
+      <!-- Invite Code -->
+      <div class="container">
+        <strong>Invite Code</strong>
+        <div id="team_invite_code"></div>
+      </div>
+      <!-- Player Search and List -->
+      <div class="container">
+        <strong>Players</strong>
+        <input type="text" id="search" class="search_bar" placeholder="Search Player" />
+        <div id="playerList" class="player_select"></div>
+      </div>
+      <!-- Update and Delete Buttons -->
+      <button type="button" class="btn" id="updateTeamButton">Update Team</button>
+      <button type="button" class="btn" id="deleteTeamButton">Delete Team</button>
+    </form>
+  </section>
+  <script src="../js/details_team.js"></script>
+  <script src="../js/burger_menu.js"></script>
+</body>
+
+</html>

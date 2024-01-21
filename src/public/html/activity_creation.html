@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../css/teamgeist_style.css" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/buttons.css" />
+  <link rel="stylesheet" href="../css/inputs.css" />
+  <link rel="stylesheet" href="../css/burger_menu.css" />
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="top_header">
+    <div class="burger-menu">
+      <button id="burgerMenuButton">&#9776;</button>
+      <div id="burgerMenuContent" class="burger-menu-content">
+        <a href="/dashboard">Dashboard</a>
+        <a href="/teamDetails">Team Details</a>
+        <a href="/userDetails">User Details</a>
+        <a href="#" id="logoutLink">Logout</a>
+      </div>
+    </div>
+  </div>
+  <section>
+    <form action="#">
+      <div class="team_geist_form_row">
+        <div>
+          <label for="betreff">Betreff</label>
+        </div>
+        <input type="text" name="betreff" id="betreff" required />
+      </div>
+      <div class="team_geist_form_row">
+        <div>
+          <label for="aktivitat">Aktivität</label>
+        </div>
+
+        <select name="aktivitat" id="aktivitat">
+          <option value="Training">Training</option>
+          <option value="Game">Game</option>
+          <option value="Other Activity">Andere Aktivität</option>
+        </select>
+      </div>
+      <div class="team_geist_form_row" id="gegner_row">
+        <div>
+          <label for="gegner">Gegner</label>
+        </div>
+        <input type="text" name="gegner" id="gegner" required/>
+      </div>
+      <div class="team_geist_form_row">
+        <div>
+          <label for="datum">Datum und Uhrzeit</label>
+        </div>
+
+        <input type="datetime-local" name="datum" id="datum" required/>
+      </div>
+      <div class="team_geist_form_row">
+        <div>
+          <label for="ort">Ort</label>
+        </div>
+
+        <input type="text" name="ort" id="ort" required/>
+      </div>
+    </form>
+    <button id="save_btn" class="btn">Speichern</button>
+    <button id="cancel_btn" class="btn">Abbrechen</button>
+  </section>
+  <script src="../js/activity_creation.js"></script>
+  <script src="../js/burger_menu.js"></script>
+</body>
+
+</html>
