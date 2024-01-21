@@ -14,7 +14,7 @@ function saveActivity() {
         location: location
     };
 
-    fetch("/api/teams/activities", {
+    fetch("/api/teams/activities/new", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(activity)
