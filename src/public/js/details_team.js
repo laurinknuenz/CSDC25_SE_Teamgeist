@@ -69,7 +69,6 @@ function searchTeamMembers(searchText) {
 
 
 function displayTeamMembers(members) {
-    console.log('Team Members:', members);
     const playerList = document.getElementById('playerList');
     playerList.innerHTML = ''; // Clear existing list
     members.forEach(member => {
@@ -88,6 +87,7 @@ function displayTeamMembers(members) {
     });
 }
 
+
 function displayManagerInfo(manager) {
     if (manager) {
         document.getElementById('team_manager_name').textContent = `${manager.firstname} ${manager.lastname}`;
@@ -99,12 +99,14 @@ function displayManagerInfo(manager) {
 }
 
 function handleUserRole(user) {
-    if (user.role === 'manager') {
+    currentUserRole = user.role;
+    if (currentUserRole === 'manager') {
         enableEditing();
     } else {
         disableEditing();
     }
 }
+
 
 function enableEditing() {
     document.getElementById('team_name').disabled = false;
@@ -156,6 +158,7 @@ function deleteTeam() {
 }
 
 function deleteUser(userId) {
+    console.log(userId);
     if (confirm('Are you sure you want to delete this user?')) {
         fetch(`/api/users/member`, {
             method: 'DELETE',
