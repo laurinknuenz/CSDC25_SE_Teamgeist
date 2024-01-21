@@ -4,6 +4,16 @@ document.addEventListener('DOMContentLoaded', () => {
     setupEventListeners();
 });
 
+fetch('/api/users/')
+    .then(response => response.json())
+    .then(data => {
+        if (data.user.role === 'player') {
+            document.getElementById('createActivity').disabled = true;
+            document.getElementById('createActivity').style.display = 'none';
+        }
+    })
+    .catch(error => console.error('Error fetching user data:', error));
+
 fetch('/api/users', {
     method: 'GET'
 })
