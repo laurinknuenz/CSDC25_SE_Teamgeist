@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 let allTeamMembers = [];  // This will store all team members
-
+let currentUserRole = '';  // This will store the current user's role
 
 function fetchTeamData() {
     fetch('/api/teams/')
@@ -69,19 +69,23 @@ function searchTeamMembers(searchText) {
 
 
 function displayTeamMembers(members) {
-    console.log('Team Members:', members);
     const playerList = document.getElementById('playerList');
     playerList.innerHTML = ''; // Clear existing list
     members.forEach(member => {
         const memberElement = document.createElement('div');
         memberElement.className = 'player';
-        memberElement.innerHTML = `
-            <strong>${member.firstname} ${member.lastname}</strong>
-            <button onclick="deleteUser('${member._id}')">Delete</button>
-        `;
+        let memberContent = `<strong>${member.firstname} ${member.lastname}</strong>`;
+
+        // Only add the delete button for managers
+        if (currentUserRole === 'manager') {
+            memberContent += `<button onclick="deleteUser('${member._id}')">Delete</button>`;
+        }
+
+        memberElement.innerHTML = memberContent;
         playerList.appendChild(memberElement);
     });
 }
+
 
 function displayManagerInfo(manager) {
     if (manager) {
@@ -94,12 +98,14 @@ function displayManagerInfo(manager) {
 }
 
 function handleUserRole(user) {
-    if (user.role === 'manager') {
+    currentUserRole = user.role;
+    if (currentUserRole === 'manager') {
         enableEditing();
     } else {
         disableEditing();
     }
 }
+
 
 function enableEditing() {
     document.getElementById('team_name').disabled = false;
@@ -151,6 +157,7 @@ function deleteTeam() {
 }
 
 function deleteUser(userId) {
+    console.log(userId);
     if (confirm('Are you sure you want to delete this user?')) {
         fetch(`/api/users/member`, {
             method: 'DELETE',
