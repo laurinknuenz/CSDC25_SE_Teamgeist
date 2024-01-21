@@ -69,12 +69,12 @@ async function getUserTeamIdTeamActivitiesFromUserId(userId, onlyActivites) {
 
 export async function deleteActivity(req, res) {
     const user = await User.findById(req.session.passport.user);
-
+    console.log(req.body.activityId);
     if (user.role == "manager") {
         const { teamId, team, activities } = await getUserTeamIdTeamActivitiesFromUserId(user._id, 0);
 
-        let activity = activities.find((activity) => activity._id == req.body.activityId);
-        if (activity != undefined) {
+        let activity = activities.findIndex((activity) => activity._id == req.body.activityId);
+        if (activity != -1) {
             activities.splice(activity, 1);
             team.activities = activities;
             await Team.findByIdAndUpdate(teamId, team);
