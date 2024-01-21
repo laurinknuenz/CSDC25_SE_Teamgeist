@@ -4,10 +4,12 @@ document.addEventListener('DOMContentLoaded', () => {
     setupEventListeners();
 });
 
+let userRole;
 fetch('/api/users/')
     .then(response => response.json())
     .then(data => {
-        if (data.user.role === 'player') {
+        userRole = data.user.role;
+        if (userRole === 'player') {
             document.getElementById('createActivity').disabled = true;
             document.getElementById('createActivity').style.display = 'none';
         }
@@ -53,12 +55,16 @@ function displayActivities(activities) {
               <button class="btn" onclick="changeAttendance('${activity._id}', true)">Zusagen</button>
               <button class="btn" onclick="changeAttendance('${activity._id}', false)">Absagen</button>
               <button class="btn" onclick="redirectToActivityDetails('${activity._id}')">Details</button>
-              <button class="btn" onclick="deleteActivity('${activity._id}')">Löschen</button>
-            </div>
-        `;
-
+            </div>`;
         // Add event listener to each activity element for redirection to details page
         activitySection.appendChild(activityElement);
+        if (userRole == "manager") {
+            let delButton = document.createElement("button");
+            delButton.className = "btn";
+            delButton.onclick = () => deleteActivity(activity._id);
+            delButton.innerHTML = "Löschen";
+            activityElement.getElementsByClassName("dashboard_btns")[0].appendChild(delButton);
+        }
     });
 }
 
