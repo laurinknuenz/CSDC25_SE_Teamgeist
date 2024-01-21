@@ -4,6 +4,16 @@ document.addEventListener('DOMContentLoaded', () => {
     setupEventListeners();
 });
 
+fetch('/api/users/')
+    .then(response => response.json())
+    .then(data => {
+        if (data.user.role === 'player') {
+            document.getElementById('createActivity').disabled = true;
+            document.getElementById('createActivity').style.display = 'none';
+        }
+    })
+    .catch(error => console.error('Error fetching user data:', error));
+
 fetch('/api/users', {
     method: 'GET'
 })
@@ -34,7 +44,7 @@ function displayActivities(activities) {
         activityElement.className = 'dashboard_element';
         activityElement.innerHTML = `
             <h3>${activity.subject}</h3>
-            <strong>${activity.type} - Endergebnis: __:__</strong>
+            <strong>${activity.type}</strong>
             <div class="todos">
               <div class="todo_row"><strong>Wann</strong><span>-</span><strong>${formatDate(activity.date)}</strong></div>
               <div class="todo_row"><strong>Wo</strong><span>-</span><strong>${activity.location}</strong></div>
@@ -42,11 +52,12 @@ function displayActivities(activities) {
             <div class="dashboard_btns">
               <button class="btn" onclick="changeAttendance('${activity._id}', true)">Zusagen</button>
               <button class="btn" onclick="changeAttendance('${activity._id}', false)">Absagen</button>
+              <button class="btn" onclick="redirectToActivityDetails('${activity._id}')">Details</button>
+              <button class="btn" onclick="deleteActivity('${activity._id}')">Löschen</button>
             </div>
         `;
 
         // Add event listener to each activity element for redirection to details page
-        activityElement.addEventListener('click', () => redirectToActivityDetails(activity._id));
         activitySection.appendChild(activityElement);
     });
 }
@@ -61,6 +72,19 @@ function changeAttendance(activityId, attendance) {
         .then(response => response.json())
         .then(() => {
             alert('Attendance updated successfully!');
+            fetchActivities(); // Refresh the list of activities to reflect changes
+        })
+        .catch(error => console.error('Error updating attendance:', error));
+}
+
+function deleteActivity(activityId) {
+    fetch('/api/teams/activities/', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ activityId })
+    })
+        .then(() => {
+            alert('Activity deleted successfully!');
             fetchActivities(); // Refresh the list of activities to reflect changes
         })
         .catch(error => console.error('Error updating attendance:', error));
