@@ -24,20 +24,24 @@ document.getElementById('logoutLink').addEventListener('click', function (event)
 });
 
 function fetchTeamData() {
-    // Assuming the team ID is stored in a session or a similar mechanism
     fetch('/api/teams/')
         .then(response => response.json())
         .then(data => {
+            console.log(data.team.manager);
             displayTeamData(data.team);
             setupTeamMembers(data.team.listOfMembers);
+            displayManagerInfo(data.team.manager);
         })
         .catch(error => console.error('Error fetching team data:', error));
+
 
     fetch('/api/users/')
         .then(response => response.json())
         .then(data => {
+            console.log(data.manager);
             handleUserRole(data.user);
-            displayManagerInfo(data.user);
+            //displayManagerInfo(data.manager);
+            console.log(data.manager);
         })
         .catch(error => console.error('Error fetching user data:', error));
 }
@@ -83,8 +87,12 @@ function displayTeamMembers(members) {
 }
 
 function displayManagerInfo(manager) {
-    document.getElementById('team_manager_name').textContent = manager.firstname + ' ' + manager.lastname;
-    document.getElementById('team_manager_contact').textContent = manager.email;
+    if (manager) {
+        document.getElementById('team_manager_name').textContent = `${manager.firstname} ${manager.lastname}`;
+        document.getElementById('team_manager_contact').textContent = manager.email;
+    } else {
+        console.log('Manager information is not available.');
+    }
 }
 
 function handleUserRole(user) {
