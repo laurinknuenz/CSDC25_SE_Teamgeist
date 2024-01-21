@@ -3,7 +3,7 @@ import passport from 'passport';
 export function login(req, res, next) {
     console.log("Passport: Starting Authentication Process...");
     passport.authenticate('local', {
-        failureRedirect: '/login',
+        failureRedirect: '',
         successRedirect: '/dashboard'
     })(req, res, next);
 }

@@ -15,8 +15,8 @@ const TeamSchema = new Schema({
         ref: "User"
     }],
     activities: [{
-        activityId: {
-            type: String,
+        _id: {
+            type: Number,
             required: true
         },
         subject: { type: String },
@@ -27,8 +27,11 @@ const TeamSchema = new Schema({
         date: { type: Date },
         location: { type: String },
         listOfAttendees: [{
-            type: Schema.Types.ObjectId,
-            ref: "User"
+            _id: {
+                type: Schema.Types.ObjectId,
+                ref: "User"
+            },
+            attendance: { type: Boolean }
         }]
     }],
     inviteCode: {
