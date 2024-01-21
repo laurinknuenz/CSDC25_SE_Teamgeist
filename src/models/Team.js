@@ -24,6 +24,7 @@ const TeamSchema = new Schema({
             type: String,
             enum: ["Training", "Game", "Other Activity"]
         },
+        opponent: { type: String },
         date: { type: Date },
         location: { type: String },
         listOfAttendees: [{

@@ -65,6 +65,13 @@ function displayActivities(activities) {
             delButton.innerHTML = "Löschen";
             activityElement.getElementsByClassName("dashboard_btns")[0].appendChild(delButton);
         }
+        if(activity.type=="Game"){
+            let opponent = document.createElement("div");
+            opponent.className="todo_row";
+            opponent.innerHTML=`<strong>Gegner</strong><span>-</span><strong>${activity.opponent}</strong>`
+            activityElement.getElementsByClassName("todos")[0].appendChild(opponent);
+            console.log(activityElement.getElementsByClassName("todos"));
+        }
     });
 }
 
