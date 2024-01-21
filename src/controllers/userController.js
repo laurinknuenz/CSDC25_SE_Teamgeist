@@ -74,10 +74,13 @@ export async function getTeamMembers(req, res) {
     const user = await User.findById(id);
     const team = await Team.findById(user.team);
     const manager = returnUser(await User.findById(team.manager));
+
     const teammembers = await User.find({ "team": team, "role": "player" });
     let returnTeammembers = [];
     for (let teammember of teammembers) {
-        returnTeammembers.push(returnUser(teammember));
+        let returnTeammember = returnUser(teammember);
+        if(user.role=="manager") returnTeammember.userId = teammember._id;
+        returnTeammembers.push(returnTeammember);
     }
     res.status(200).json({
         "manager": manager,
@@ -101,8 +104,26 @@ export async function deleteUser(req, res) {
         await deleteTeam(teamId);
     }
     else {
-        await removePlayerFromTeam(teamId, userId)
-        await User.deleteOne(userToDelete);
+        deletePlayer(teamId, userId)
     }
-    res.status(204).json();
+    res.status(204).end();
+}
+
+export async function deleteTeamMember(req, res) {
+    const deletingUserId = req.session.passport.user;
+    const deletingUser = await User.findById(deletingUserId);
+    const userToDelete = await User.findById(req.body.userId);
+    console.log(userToDelete);
+
+    if (deletingUser.role != "manager") return res.status(401).json({ message: "You are not the manager." });
+    if (userToDelete.team.toString() !== deletingUser.team.toString()) return res.status(401).json({ message: "The player is not in your team." });
+    if (userToDelete.role == "manager") return res.status(401).json({ message: "You can not remove a manager in this way." });
+
+    deletePlayer(userToDelete.team, userToDelete._id);
+    res.status(204).end();
+}
+
+async function deletePlayer(teamId, userId) {
+    await removePlayerFromTeam(teamId, userId);
+    await User.findByIdAndDelete(userId);
 }

@@ -29,4 +29,12 @@ mainRouter.get('/teamDetails', checkAuthenticated, (req, res) => {
     res.sendFile(path.join(process.cwd(), feUrl, "details_team.html"));
 });
 
+mainRouter.get('/activityDetails', checkAuthenticated, (req, res) => {
+    res.sendFile(path.join(process.cwd(), feUrl, "activity_details.html"));
+});
+
+mainRouter.get('/activityCreation', checkAuthenticated, (req, res) => {
+    res.sendFile(path.join(process.cwd(), feUrl, "activity_creation.html"));
+});
+
 export default mainRouter;
