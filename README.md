@@ -12,10 +12,51 @@ Teamgeist ist eine Web-App für Team- und Aktivitätenmanagement von Sportmannsc
 ### 2. Commands you need all the time
 **npm run start-nodemon** → Mit diesem Command kann der Backend-Server mit Nodemon gestartet werden.
 
-# David Notizen *
+## Notes
 npm install short-unique-id bcrypt passport-local mongoose
-other npm install, lost documentation
-
-# if port is already in use #
 netstat -ano | findstr :3000
 taskkill /F /PID 9999 
+
+## Project Structure Overview
+
+### `/config`
+- `dbconnection.js`: Configuration and setup for the database connection.
+- `passport.js`: Passport.js configuration for authentication.
+
+### `/controllers`
+- `activitiesController.js`: Handles requests related to activity operations.
+- `authController.js`: Handles authentication-related operations.
+- `teamController.js`: Manages team-related requests.
+- `userController.js`: Manages user-related requests.
+
+### `/models`
+- `Team.js`: Schema and model definition for teams.
+- `User.js`: Schema and model definition for users.
+
+### `/CSS`
+Stylesheets for different components of the application.
+
+### `/html`
+HTML files for different views.
+
+### `/images`
+Logo image used across the platform.
+
+### `/js`
+Client-side JavaScript files to handle user interactions and data manipulation.
+
+### `/routes`
+- `activitiesRouter.js`: Routes for activity-related endpoints.
+- `authRouter.js`: Routes for authentication-related endpoints.
+- `mainRouter.js`: Main routes for the application.
+- `teamRouter.js`: Routes for team-related operations.
+- `userRouter.js`: Routes for user-related operations.
+
+### `/server`
+- `server.js`: The entry point for the server, setting up the application.
+
+### `/util`
+- `authcheck.js`: Utility functions for authentication checks.
+
+### Root Files
+- `.env`: Environment variables for the project (not tracked by git).
