@@ -5,7 +5,7 @@ import { User } from "../models/User.js";
 passport.use(
   new LocalStrategy(async function (username, password, cb) {
     const user = (await User.find({ "username": username }))[0];
-    if (user === null || user.password !== password) {
+    if (user === undefined || user.password !== password) {
       console.log("Passport: Incorrect username or password.");
       return cb(null, false, { message: "Incorrect username or password." });
     }
