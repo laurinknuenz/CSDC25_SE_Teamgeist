@@ -31,7 +31,7 @@ function handleRegisterButtonClick(event) {
   })
     .then(response => {
       if (!response.ok) {
-        throw new Error("Registration failed");
+          return response.json().then(err => { throw new Error(err.message); });
       }
       return response.json();
     })
@@ -46,6 +46,10 @@ function handleRegisterButtonClick(event) {
       }
     })
     .catch(error => {
-      document.getElementById("responseMessage").textContent = error.message;
-    });
+      if (error.message === "Username already in use.") {
+          document.getElementById("responseMessage").textContent = "Registration failed: Username already in use.";
+      } else {
+          document.getElementById("responseMessage").textContent = "Registration failed: " + error.message;
+      }
+  });
 }
