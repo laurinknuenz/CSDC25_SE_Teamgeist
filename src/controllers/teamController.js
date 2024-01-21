@@ -42,7 +42,7 @@ export async function addPlayerToTeam(teamId, playerId) {
 
 export async function removePlayerFromTeam(teamId, playerId) {
     let playersTeam = await Team.findById(teamId);
-    playersTeam.listOfMembers.splice(playersTeam.listOfMembers.findIndex(item => item.toString() === playerId), 1);
+    playersTeam.listOfMembers.splice(playersTeam.listOfMembers.findIndex(item => item.toString() === playerId.toString()), 1);
     await Team.findByIdAndUpdate(teamId, playersTeam);
 }
 
