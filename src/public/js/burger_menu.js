@@ -17,14 +17,3 @@ document.getElementById('logoutLink').addEventListener('click', function (event)
         })
         .catch(error => console.error('Error:', error));
 });
-
-fetch('/api/users/', {
-    method: 'GET'
-})
-    .then(response => response.json())
-    .then(data => {
-        if (data.user) {
-            document.getElementById('userGreeting').textContent = `Hallo ${data.user.firstname}, deine Aktivitäten`;
-        }
-    })
-    .catch(error => console.error('Error:', error));
