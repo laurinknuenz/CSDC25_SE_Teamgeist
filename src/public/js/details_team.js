@@ -4,8 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 let allTeamMembers = [];  // This will store all team members
-let currentUserRole = '';  // This will store the current user's role
-
+let userRole;
 function fetchTeamData() {
     fetch('/api/teams/')
         .then(response => response.json())
@@ -26,6 +25,7 @@ function fetchTeamData() {
     fetch('/api/users/')
         .then(response => response.json())
         .then(data => {
+            userRole = data.user.role;
             handleUserRole(data.user);
         })
         .catch(error => console.error('Error fetching user data:', error));
@@ -60,8 +60,8 @@ function setupTeamMembers(memberIds) {
 }
 
 function searchTeamMembers(searchText) {
-    const filteredMembers = allTeamMembers.filter(member => 
-        member.firstname.toLowerCase().includes(searchText.toLowerCase()) || 
+    const filteredMembers = allTeamMembers.filter(member =>
+        member.firstname.toLowerCase().includes(searchText.toLowerCase()) ||
         member.lastname.toLowerCase().includes(searchText.toLowerCase())
     );
     displayTeamMembers(filteredMembers);
@@ -74,14 +74,15 @@ function displayTeamMembers(members) {
     members.forEach(member => {
         const memberElement = document.createElement('div');
         memberElement.className = 'player';
-        let memberContent = `<strong>${member.firstname} ${member.lastname}</strong>`;
-
-        // Only add the delete button for managers
-        if (currentUserRole === 'manager') {
-            memberContent += `<button onclick="deleteUser('${member._id}')">Delete</button>`;
+        memberElement.innerHTML = `
+            <strong>${member.firstname} ${member.lastname}</strong>
+        `;
+        if (userRole == "manager") {
+            let delButton = document.createElement("button");
+            delButton.onclick = () => deleteUser(member.userId);
+            delButton.innerHTML = "Delete";
+            memberElement.appendChild(delButton);
         }
-
-        memberElement.innerHTML = memberContent;
         playerList.appendChild(memberElement);
     });
 }
