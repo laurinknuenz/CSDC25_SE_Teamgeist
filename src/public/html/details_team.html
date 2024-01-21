@@ -8,10 +8,24 @@
   <link rel="stylesheet" href="../css/teamgeist_team_style.css" />
   <link rel="stylesheet" href="../css/buttons.css" />
   <link rel="stylesheet" href="../css/inputs.css" />
+  <link rel="stylesheet" href="../css/burger_menu.css" />
   <title>Team Details</title>
 </head>
 
 <body>
+  <div class="top_header">
+    <div class="burger-menu">
+      <button id="burgerMenuButton">&#9776;</button>
+      <div id="burgerMenuContent" class="burger-menu-content">
+        <a href="/dashboard">Dashboard</a>
+        <a href="/teamDetails">Team Details</a>
+        <a href="/userDetails">User Details</a>
+        <a href="/activityDetails">Show Activity</a>
+        <a href="/activityCreation">Create Activity</a>
+        <a href="#" id="logoutLink">Logout</a>
+      </div>
+    </div>
+  </div>
   <section>
     <form id="teamInfoForm">
       <!-- Team Information -->
@@ -43,6 +57,7 @@
     </form>
   </section>
   <script src="../js/details_team.js"></script>
+  <script src="../js/burger_menu.js"></script>
 </body>
 
 </html>

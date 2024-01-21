@@ -3,21 +3,28 @@ document.addEventListener('DOMContentLoaded', () => {
     setupEventListeners();
 });
 
+
 function fetchTeamData() {
-    // Assuming the team ID is stored in a session or a similar mechanism
     fetch('/api/teams/')
         .then(response => response.json())
         .then(data => {
+            console.log(data);
             displayTeamData(data.team);
             setupTeamMembers(data.team.listOfMembers);
         })
         .catch(error => console.error('Error fetching team data:', error));
 
+    fetch('/api/users/teammembers')
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            displayManagerInfo(data.manager);
+        })
+        .catch(error => console.error('Error fetching user data:', error));
     fetch('/api/users/')
         .then(response => response.json())
         .then(data => {
             handleUserRole(data.user);
-            displayManagerInfo(data.user);
         })
         .catch(error => console.error('Error fetching user data:', error));
 }
@@ -63,8 +70,13 @@ function displayTeamMembers(members) {
 }
 
 function displayManagerInfo(manager) {
-    document.getElementById('team_manager_name').textContent = manager.firstname + ' ' + manager.lastname;
-    document.getElementById('team_manager_contact').textContent = manager.email;
+    if (manager) {
+        document.getElementById('team_manager_name').textContent = `${manager.firstname} ${manager.lastname}`;
+        document.getElementById('team_manager_contact').textContent = manager.email;
+    } else {
+        document.getElementById('team_manager_contact').textContent = "not available";
+        console.log('Manager information is not available.');
+    }
 }
 
 function handleUserRole(user) {
@@ -105,9 +117,9 @@ function updateTeam() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updatedData)
     })
-    .then(response => response.json())
-    .then(() => alert('Team updated successfully!'))
-    .catch(error => console.error('Error updating team:', error));
+        .then(response => response.json())
+        .then(() => alert('Team updated successfully!'))
+        .catch(error => console.error('Error updating team:', error));
 }
 
 function deleteTeam() {
@@ -123,8 +135,17 @@ function deleteTeam() {
 
 function deleteUser(userId) {
     if (confirm('Are you sure you want to delete this user?')) {
-        fetch(`/api/users/${userId}`, { method: 'DELETE' })
-            .then(() => {
+        fetch(`/api/users/member`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ userId: userId })
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to delete user');
+                }
                 alert('User deleted successfully!');
                 fetchTeamData(); // Refresh team data
             })
