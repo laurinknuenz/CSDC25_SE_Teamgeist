@@ -1,47 +1,42 @@
-document
-  .getElementById("backToRegisterButton")
-  .addEventListener("click", handleRegisterButtonClick);
-
-document
-  .getElementById("loginUserForm")
-  .addEventListener("submit", handleLoginButtonClick);
-
-function handleRegisterButtonClick(event) {
-  event.preventDefault();
-
-  // Redirect to register
-  window.location.href = '/register';
-}
+// Add event listeners for the login form and back to register button
+document.getElementById("loginUserForm").addEventListener("submit", handleLoginButtonClick);
+document.getElementById("backToRegisterButton").addEventListener("click", handleRegisterButtonClick);
 
 function handleLoginButtonClick(event) {
   event.preventDefault();
+
+  // Retrieve login form values
   const username = document.querySelector('input[name="username"]').value;
   const password = document.querySelector('input[name="password"]').value;
 
-  const data = {
-    username: username,
-    password: password,
-  };
+  // Prepare data for login request
+  const loginData = { username, password };
 
-  fetch("/api/auth/login", {
+  // Post login data to authentication API
+  fetch("/auth/login/", {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(loginData),
   })
-    .then((response) => response.json())
-    .then((result) => {
-      if (result.success) {
-        // Authentication was successful, redirect the user to the dashboard or another page
-        window.location.href = "/dashboard";
-      } else {
-        // Authentication failed, display an error message
-        document.getElementById("errorMessage").textContent = "Login failed. Please check your credentials.";
-      }
-    })
-    .catch((error) => {
-      document.getElementById("responseMessage").textContent = error.message;
-      console.error("Error during login:", error);
-    });
+  .then(result => {
+    console.log(result);
+    if (result.status == 200) {
+      // Authentication was successful, redirect to dashboard
+      console.log("Login success");
+      window.location.href = "/dashboard";
+    } else {
+      // Authentication failed, display an error message
+      document.getElementById("responseMessage").textContent = "Login failed. Please check your credentials.";
+    }
+  })
+  .catch(error => {
+    document.getElementById("responseMessage").textContent = error.message;
+    console.error("Error during login:", error);
+  });
+}
+
+function handleRegisterButtonClick(event) {
+  event.preventDefault();
+  // Redirect to the register page
+  window.location.href = '/register';
 }

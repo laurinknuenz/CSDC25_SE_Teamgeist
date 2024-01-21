@@ -1,4 +1,5 @@
 import { Team } from "../models/Team.js"
+import { User } from "../models/User.js";
 
 export async function createTeam(req) {
     const newTeam = await Team.create(req.body);
@@ -8,10 +9,14 @@ export async function createTeam(req) {
 export async function updateTeam(req, res) {
     console.log(req.body);
 
-    const id = req.params.id;
-    await Team.findByIdAndUpdate(id, req.body);
-    const updatedTeam = await Team.findById(id);
-    res.status(200).json({ updatedTeam });
+    const user = await User.findById(req.session.passport.user);
+    if (user.role != "manager") res.sendStatus(403);
+    else {
+        const id = user.team;
+        await Team.findByIdAndUpdate(id, req.body);
+        const updatedTeam = await Team.findById(id);
+        res.status(200).json({ updatedTeam });
+    }
 }
 
 export async function addManagerToTeam(teamId, playerId) {
@@ -36,13 +41,16 @@ export async function removePlayerFromTeam(teamId, playerId) {
 }
 
 export async function getTeam(req, res) {
-    const id = req.params.id;
+    const user = await User.findById(req.session.passport.user);
+    const id = user.team;
+    
     const team = await Team.findById(id);
     res.status(200).json({ team });
 }
 
 export async function getTeamIdByInviteCode(inviteCode) {
     const team = await Team.find({ "inviteCode": inviteCode });
+    if (team.length == 0) return null;
     return team[0]._id;
 }
 

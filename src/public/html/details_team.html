@@ -8,102 +8,41 @@
   <link rel="stylesheet" href="../css/teamgeist_team_style.css" />
   <link rel="stylesheet" href="../css/buttons.css" />
   <link rel="stylesheet" href="../css/inputs.css" />
-  <title>Document</title>
+  <title>Team Details</title>
 </head>
 
 <body>
   <section>
-
-    <form action="#">
-      <div class="container">
-        <div>
-          <strong>Team Information</strong>
-        </div>
-
-        <input type="text" name="team_name" id="team_name" placeholder="Team Name" />
-        <input type="text" name="team_type" id="team_type" placeholder="Sport Type" />
+    <form id="teamInfoForm">
+      <!-- Team Information -->
+      <div class="container" id="teamInfoContainer">
+        <strong>Team Information</strong>
+        <input type="text" id="team_name" placeholder="Team Name" disabled />
+        <input type="text" id="team_type" placeholder="Sport Type" disabled />
       </div>
-      <div class="container">
-        <div>
-          <strong>Manager Information</strong>
-        </div>
-
-        <div id="team_manager_name">Manager Vorname Nachname</div>
-        <div id="team_manager_contact">Manager E-Mail Adresse</div>
+      <!-- Manager Information -->
+      <div class="container" id="managerInfoContainer">
+        <strong>Manager Information</strong>
+        <div id="team_manager_name"></div>
+        <div id="team_manager_contact"></div>
       </div>
+      <!-- Invite Code -->
       <div class="container">
-        <div>
-          <strong>Invite Code</strong>
-        </div>
-
-        <div id="team_invite_code">AMSD2A</div>
+        <strong>Invite Code</strong>
+        <div id="team_invite_code"></div>
       </div>
+      <!-- Player Search and List -->
       <div class="container">
-        <div>
-          <strong>Players</strong>
-        </div>
-
-        <input type="text" name="search" id="search" class="search_bar" placeholder="Search Player" />
-        <div class="player_select">
-          <div class="player">
-            <img src="" alt="." />
-            <strong>Max Musterman</strong>
-          </div>
-          <div class="player">
-            <img src="" alt="." />
-            <strong>Max Musterman</strong>
-          </div>
-          <div class="player">
-            <img src="" alt="." />
-            <strong>Max Musterman</strong>
-          </div>
-        </div>
+        <strong>Players</strong>
+        <input type="text" id="search" class="search_bar" placeholder="Search Player" />
+        <div id="playerList" class="player_select"></div>
       </div>
+      <!-- Update and Delete Buttons -->
+      <button type="button" class="btn" id="updateTeamButton">Update Team</button>
+      <button type="button" class="btn" id="deleteTeamButton">Delete Team</button>
     </form>
-
-    <button class="btn" id="create_btn">Update</button>
   </section>
+  <script src="../js/details_team.js"></script>
 </body>
-<script>
-  const responseObj = {
-    team_name: "Team 1",
-    team_type: "Some type",
-    team_location: "Wien",
-    team_manager_name: "Manager 1",
-    team_manager_contact: "+2342342344234",
-  };
-
-  function getData() {
-    Object.keys(responseObj).forEach((item) => {
-      document.getElementById(item).value = responseObj[item];
-    });
-  }
-
-  function clearData() {
-    Object.keys(responseObj).forEach((item) => {
-      document.getElementById(item).value = "";
-    });
-  }
-
-  document.getElementById("to_create").addEventListener("click", (ev) => {
-    const btn = document.getElementById("to_create");
-    const otherBtn = document.getElementById("to_manage");
-    if (!btn.classList.contains("active")) {
-      btn.classList.add("active");
-      otherBtn.classList.remove("active");
-      clearData();
-    }
-  });
-
-  document.getElementById("to_manage").addEventListener("click", (ev) => {
-    const btn = document.getElementById("to_manage");
-    const otherBtn = document.getElementById("to_create");
-    if (!btn.classList.contains("active")) {
-      btn.classList.add("active");
-      otherBtn.classList.remove("active");
-      getData();
-    }
-  });
-</script>
 
 </html>

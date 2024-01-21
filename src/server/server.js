@@ -1,7 +1,7 @@
 import express from 'express';
 import path from 'path';
 import connectToDatabase from '../config/dbconnection.js';
-import passport from 'passport';
+import passport from '../config/passport.js';
 import session from 'express-session';
 
 import authRouter from '../routes/authRouter.js';
@@ -9,8 +9,8 @@ import mainRouter from '../routes/mainRouter.js';
 import userRouter from '../routes/userRouter.js';
 import teamRouter from '../routes/teamRouter.js';
 
-const app = express();
 const port = 3000;
+const app = express();
 
 app.use(express.json());
 app.use(express.static(path.join(process.cwd(), 'src/public')));
