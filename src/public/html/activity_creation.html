@@ -1,81 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../css/teamgeist_style.css" />
-    <link rel="stylesheet" href="../css/main.css" />
-    <link rel="stylesheet" href="../css/buttons.css" />
-    <link rel="stylesheet" href="../css/inputs.css" />
-    <style>
-      body {
-        background: #969696;
-      }
-    </style>
-    <title>Document</title>
-  </head>
 
-  <body>
-    <section>
-      <form action="#">
-        <div class="team_geist_form_row">
-          <div>
-            <label for="betreff">Betreff</label>
-          </div>
-          <input type="text" name="betreff" id="betreff" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../css/teamgeist_style.css" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/buttons.css" />
+  <link rel="stylesheet" href="../css/inputs.css" />
+  <link rel="stylesheet" href="../css/burger_menu.css" />
+  <title>Document</title>
+</head>
+
+<body>
+  <section>
+    <form action="#">
+      <div class="team_geist_form_row">
+        <div>
+          <label for="betreff">Betreff</label>
         </div>
-        <div class="team_geist_form_row">
-          <div>
-            <label for="aktivitat">Aktivität</label>
-          </div>
-
-          <select name="aktivitat" id="aktivitat">
-            <option value="" disabled></option>
-            <option value="football">Football</option>
-          </select>
+        <input type="text" name="betreff" id="betreff" />
+      </div>
+      <div class="team_geist_form_row">
+        <div>
+          <label for="aktivitat">Aktivität</label>
         </div>
-        <div class="team_geist_form_row">
-          <div>
-            <label for="datum">Datum und Uhrzeit</label>
-          </div>
 
-          <input type="date" name="datum" id="datum" />
+        <select name="aktivitat" id="aktivitat">
+          <option value="Training">Training</option>
+          <option value="Game">Game</option>
+          <option value="Other Activity">Andere Aktivität</option>
+        </select>
+      </div>
+      <div class="team_geist_form_row">
+        <div>
+          <label for="datum">Datum und Uhrzeit</label>
         </div>
-        <div class="team_geist_form_row">
-          <div>
-            <label for="ort">Ort</label>
-          </div>
 
-          <input type="text" name="ort" id="ort" />
+        <input type="datetime-local" name="datum" id="datum" />
+      </div>
+      <div class="team_geist_form_row">
+        <div>
+          <label for="ort">Ort</label>
         </div>
-      </form>
-      <button id="save_btn" class="btn">Speichern</button>
-      <button id="cancel_btn" class="btn">Abbrechen</button>
-    </section>
-  </body>
 
-  <script>
-    document.getElementById("save_btn").addEventListener("click", (ev) => {
-      let betreff = document.getElementById("betreff");
-      let aktivitat = document.getElementById("aktivitat");
-      let datum = document.getElementById("datum");
-      let ort = document.getElementById("ort");
-
-      const sendObject = {};
-      if (betreff) {
-        sendObject.betreff = betreff.value;
-      }
-      if (aktivitat) {
-        sendObject.aktivitat = aktivitat.value;
-      }
-      if (datum) {
-        sendObject.datum = datum.value;
-      }
-      if (ort) {
-        sendObject.ort = ort.value;
-      }
-
-      console.log(sendObject);
-    });
-  </script>
+        <input type="text" name="ort" id="ort" />
+      </div>
+    </form>
+    <button id="save_btn" class="btn">Speichern</button>
+    <button id="cancel_btn" class="btn">Abbrechen</button>
+  </section>
+  <script src="../js/activity_creation.js"></script>
+</body>
+<div class="top_header">
+  <div class="burger-menu">
+    <button id="burgerMenuButton">&#9776;</button>
+    <div id="burgerMenuContent" class="burger-menu-content">
+      <a href="/dashboard">Dashboard</a>
+      <a href="/teamDetails">Team Details</a>
+      <a href="/userDetails">User Details</a>
+      <a href="/activityDetails">Show Activity</a>
+      <a href="/activityCreation">Create Activity</a>
+      <a href="#" id="logoutLink">Logout</a>
+    </div>
+  </div>
+  <h2>Team FH Wien</h2>
+</div>
 </html>
