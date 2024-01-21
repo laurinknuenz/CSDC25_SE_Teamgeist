@@ -74,12 +74,13 @@ export async function getTeamMembers(req, res) {
     const user = await User.findById(id);
     const team = await Team.findById(user.team);
     const manager = returnUser(await User.findById(team.manager));
+    manager.userId = team.manager._id;
 
     const teammembers = await User.find({ "team": team, "role": "player" });
     let returnTeammembers = [];
     for (let teammember of teammembers) {
         let returnTeammember = returnUser(teammember);
-        if(user.role=="manager") returnTeammember.userId = teammember._id;
+        returnTeammember.userId = teammember._id;
         returnTeammembers.push(returnTeammember);
     }
     res.status(200).json({

@@ -148,7 +148,7 @@ function updateTeam() {
 
 function deleteTeam() {
     if (confirm('Are you sure you want to delete this team?')) {
-        fetch('/api/teams/', { method: 'DELETE' })
+        fetch('/api/users/', { method: 'DELETE' })
             .then(() => {
                 alert('Team deleted successfully!');
                 window.location.href = '/'; // Redirect to a safe page
